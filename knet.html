@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f8fa" />
+    <meta
+      name="description"
+      content="معاينة آمنة لواجهة الدفع. الدفع الإلكتروني غير مفعّل حاليًا."
+    />
+    <title>بيانات الدفع | دجاج الكويت</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Tahoma, Arial, sans-serif;
+        color: #34475a;
+        background: #f6f8fa;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        --blue: #14699f;
+        --line: #dfe6ed;
+        --muted: #77899a;
+        --orange: #ff9f24;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        padding: 18px 0 28px;
+      }
+
+      a,
+      button {
+        font: inherit;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      main {
+        width: min(100% - 24px, 470px);
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #e1e6eb;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 0 4px 18px rgba(36, 66, 90, 0.06);
+      }
+
+      .top-stripe {
+        height: 7px;
+        background: linear-gradient(90deg, #288b6d, #67a36b 42%, #ff9f24);
+      }
+
+      .content {
+        padding: 15px clamp(14px, 4vw, 24px) 20px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      h1 {
+        margin: 0;
+        color: #56616d;
+        font-size: 16px;
+      }
+
+      .brands {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        direction: ltr;
+      }
+
+      .visa {
+        color: #173b80;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        font-style: italic;
+        font-weight: 900;
+      }
+
+      .mastercard {
+        position: relative;
+        width: 24px;
+        height: 16px;
+      }
+
+      .mastercard::before,
+      .mastercard::after {
+        position: absolute;
+        top: 1px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        content: "";
+      }
+
+      .mastercard::before {
+        left: 0;
+        background: #ed3c35;
+      }
+
+      .mastercard::after {
+        right: 0;
+        background: #f4a022;
+        opacity: 0.96;
+      }
+
+      .instruction {
+        margin: 10px 0 16px;
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1.8;
+      }
+
+      .amount-card {
+        padding: 14px;
+        border: 1px solid #e5ebf1;
+        border-radius: 19px;
+        background: #f7f9fb;
+      }
+
+      .amount-title {
+        margin: 0 0 8px;
+        color: var(--blue);
+        font-size: 15px;
+        font-weight: 800;
+      }
+
+      .amount-row {
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 14px;
+        border: 1px solid #ffd89f;
+        border-radius: 18px;
+        background: linear-gradient(100deg, #fff5df, #fff0d5);
+      }
+
+      .amount-label {
+        color: var(--blue);
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .amount-value {
+        color: #f09a22;
+        font-size: 17px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .amount-note {
+        margin: 9px 2px 0;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.8;
+      }
+
+      .fields-preview {
+        display: grid;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .field-preview label,
+      .field-labels {
+        display: block;
+        margin-bottom: 6px;
+        color: #5b6672;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .placeholder {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        border: 1px solid #dce3ea;
+        border-radius: 15px;
+        color: #a5afb9;
+        background: #fcfcfd;
+        font-family: Arial, Tahoma, sans-serif;
+        font-size: 14px;
+        direction: ltr;
+      }
+
+      .expiry-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .expiry-row .placeholder {
+        justify-content: center;
+      }
+
+      .expiry-labels {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .expiry-labels span:first-child {
+        direction: ltr;
+      }
+
+      .gateway-notice {
+        margin: 16px 0 0;
+        padding: 11px 12px;
+        border: 1px solid #f2d7a8;
+        border-radius: 10px;
+        color: #765213;
+        background: #fff9eb;
+        font-size: 11px;
+        line-height: 1.8;
+      }
+
+      .button {
+        min-height: 44px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 17px;
+        padding: 10px 14px;
+        border: 0;
+        border-radius: 14px;
+        color: #fff;
+        background: linear-gradient(180deg, #ffad33, #ff9415);
+        font-size: 15px;
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .button:focus-visible,
+      .back-link:focus-visible {
+        outline: 3px solid #165e8c;
+        outline-offset: 3px;
+      }
+
+      .back-link {
+        display: block;
+        width: fit-content;
+        margin: 13px auto 0;
+        color: var(--blue);
+        font-size: 12px;
+        text-underline-offset: 3px;
+      }
+
+      .fine-print {
+        margin: 15px 0 0;
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.8;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="top-stripe" aria-hidden="true"></div>
+      <div class="content">
+        <header class="header">
+          <h1>بيانات الدفع</h1>
+          <div class="brands" aria-label="Visa و Mastercard">
+            <span class="visa">VISA</span>
+            <span class="mastercard" aria-hidden="true"></span>
+          </div>
+        </header>
+
+        <p class="instruction">سيتم تنفيذ عملية الدفع من خلال الوسيلة المحددة أدناه.</p>
+
+        <section class="amount-card" aria-labelledby="amount-heading">
+          <h2 id="amount-heading" class="amount-title">الحسبة</h2>
+          <div class="amount-row">
+            <span class="amount-label">المجموع</span>
+            <span id="order-total" class="amount-value">— د.ك</span>
+          </div>
+          <p class="amount-note">تصميم توضيحي فقط، ولن تُطلب أو تُحفظ بيانات بطاقتك في هذه الصفحة.</p>
+        </section>
+
+        <section class="fields-preview" aria-label="معاينة حقول الدفع">
+          <div class="field-preview">
+            <span class="field-label">اسم حامل البطاقة</span>
+            <div class="placeholder" aria-hidden="true"></div>
+          </div>
+          <div class="field-preview">
+            <span class="field-label">رقم البطاقة</span>
+            <div class="placeholder" aria-hidden="true">0000 0000 0000 0000</div>
+          </div>
+          <div class="field-preview">
+            <div class="expiry-labels field-labels">
+              <span>CVV / CVC</span>
+              <span>تاريخ انتهاء البطاقة</span>
+            </div>
+            <div class="expiry-row">
+              <div class="placeholder" aria-hidden="true">***</div>
+              <div class="placeholder" aria-hidden="true">MM/YY</div>
+            </div>
+          </div>
+        </section>
+
+        <p class="gateway-notice">
+          بوابة الدفع غير مهيّأة حاليًا. هذه الحقول للعرض فقط ولا تقبل إدخال البيانات، ولن يتم خصم أي مبلغ.
+        </p>
+
+        <a class="button" href="./step3.html">العودة إلى طرق الدفع</a>
+        <a class="back-link" href="./cart.html">العودة إلى السلة</a>
+        <p class="fine-print">
+          أدخل بيانات البطاقة فقط في صفحة الدفع الرسمية التي يوفّرها مزود دفع معتمد.
+        </p>
+      </div>
+    </main>
+
+    <script src="./assets/js/cart.js"></script>
+    <script>
+      (function () {
+        const totalElement = document.getElementById("order-total");
+        const formatter = new Intl.NumberFormat("en", {
+          maximumFractionDigits: 3,
+        });
+
+        try {
+          const items = window.productCart.getItems();
+          const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+          totalElement.textContent = `${formatter.format(total)} د.ك`;
+        } catch (error) {
+          console.error("تعذر قراءة إجمالي السلة:", error);
+          totalElement.textContent = "تعذر تحميل الإجمالي";
+        }
+      })();
+    </script>
+  </body>
+</html>
