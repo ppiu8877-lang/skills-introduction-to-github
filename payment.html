@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الدفع | دواجن الوطنية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="checkout.css" />
+  </head>
+  <body>
+    <header class="checkout-header">
+      <a class="checkout-brand" href="index.html"><span>دواجن</span><strong>الوطنية</strong></a>
+      <div class="secure-note"><span>✓</span> عملية دفع آمنة</div>
+    </header>
+    <main class="checkout-container payment-page">
+      <div class="checkout-heading">
+        <a href="checkout.html" class="back-link">العودة لبيانات التوصيل ←</a>
+        <div><p>الخطوة 2 من 2</p><h1>طريقة الدفع</h1></div>
+      </div>
+      <div class="checkout-layout">
+        <form class="customer-form" id="payment-form">
+          <section class="form-section">
+            <h2><span>1</span> اختر طريقة الدفع</h2>
+            <div class="payment-options">
+              <label class="payment-option selected"><input type="radio" name="payment" value="knet" checked /><span><strong>الدفع عبر كي نت</strong><small>دفع آمن ومباشر باستخدام بطاقة كي نت</small></span><b class="knet-logo">KNET</b></label>
+              <label class="payment-option"><input type="radio" name="payment" value="mastercard" /><span><strong>الدفع عبر ماستركارد</strong><small>استخدم بطاقة Mastercard لإتمام الدفع بأمان</small></span><b class="mastercard-logo"><i></i><i></i><small>mastercard</small></b></label>
+            </div>
+          </section>
+          <p class="form-error" id="payment-error" role="alert"></p>
+          <button class="continue-button" id="payment-button" type="submit">الدفع عبر كي نت <span>←</span></button>
+        </form>
+        <aside class="order-summary">
+          <h2>ملخص الطلب</h2>
+          <div id="payment-items"></div>
+          <div class="summary-line"><span>عدد القطع</span><b id="payment-count">0</b></div>
+          <div class="summary-line"><span>المجموع الفرعي</span><b id="payment-subtotal">0.000 د.ك</b></div>
+          <div class="summary-line"><span>رسوم التوصيل</span><b id="payment-delivery">0.000 د.ك</b></div>
+          <div class="summary-total"><span>الإجمالي</span><strong id="payment-total">0.000 د.ك</strong></div>
+        </aside>
+      </div>
+    </main>
+    <script>
+      const storedCart = JSON.parse(localStorage.getItem("poultry-cart") || "[]");
+      const cart = Array.isArray(storedCart)
+        ? storedCart.filter((item) => item && item.name && Number.isFinite(Number(item.price)) && Number(item.price) >= 0)
+          .map((item) => ({ ...item, price: Number(item.price), quantity: Math.max(1, Number(item.quantity) || 1) }))
+        : [];
+      localStorage.setItem("poultry-cart", JSON.stringify(cart));
+      const formatPrice = (value) => `${value.toFixed(3)} د.ك`;
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const items = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const delivery = subtotal > 0 ? 0.5 : 0;
+      document.querySelector("#payment-count").textContent = items;
+      document.querySelector("#payment-subtotal").textContent = formatPrice(subtotal);
+      document.querySelector("#payment-delivery").textContent = formatPrice(delivery);
+      document.querySelector("#payment-total").textContent = formatPrice(subtotal + delivery);
+      document.querySelector("#payment-items").innerHTML = cart.map((item) => `<div class="payment-item"><span>${item.icon || "🍗"} ${item.name} × ${item.quantity}</span><b>${formatPrice(item.price * item.quantity)}</b></div>`).join("");
+      document.querySelectorAll('input[name="payment"]').forEach((input) => {
+        input.addEventListener("change", () => {
+          document.querySelector("#payment-button").firstChild.textContent = input.value === "mastercard" ? "الدفع عبر ماستركارد " : "الدفع عبر كي نت ";
+        });
+      });
+      document.querySelector("#payment-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!cart.length) {
+          document.querySelector("#payment-error").textContent = "السلة فارغة، أضف منتجًا أولًا.";
+          return;
+        }
+        const details = JSON.parse(sessionStorage.getItem("delivery-details") || "{}");
+        if (!details.name || !details.phone || !details.governorate || !details.area || !details.block || !details.street || !details.house) {
+          document.querySelector("#payment-error").textContent = "أكمل بيانات التوصيل أولًا.";
+          window.location.href = "checkout.html";
+          return;
+        }
+        const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+        const total = subtotal + delivery;
+        try {
+          const response = await fetch("/api/orders", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ customer: details, sourcePage: details.sourcePage, items: cart, totalItems: items, total, paymentMethod })
+          });
+          if (!response.ok) throw new Error("تعذر إرسال الطلب");
+          localStorage.removeItem("poultry-cart");
+          alert("تم إرسال الطلب بنجاح.");
+          window.location.href = "index.html";
+        } catch (error) {
+          document.querySelector("#payment-error").textContent = "تعذر إرسال الطلب. تأكد من تشغيل الخادم وإعداد ربط تلغرام.";
+        }
+      });
+    </script>
+  </body>
+</html>

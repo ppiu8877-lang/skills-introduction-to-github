@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إتمام الطلب | دواجن الوطنية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="checkout.css" />
+  </head>
+  <body>
+    <header class="checkout-header">
+      <a class="checkout-brand" href="index.html">
+        <span>دواجن</span>
+        <strong>الوطنية</strong>
+      </a>
+      <div class="secure-note"><span>✓</span> عملية دفع آمنة</div>
+    </header>
+
+    <main class="checkout-container">
+      <div class="checkout-heading">
+        <a href="index.html" class="back-link">العودة للتسوق ←</a>
+        <div>
+          <p>الخطوة 1 من 2</p>
+          <h1>بيانات التوصيل</h1>
+        </div>
+      </div>
+
+      <div class="checkout-layout">
+        <form class="customer-form" id="checkout-form">
+          <section class="form-section">
+            <h2><span>1</span> معلومات العميل</h2>
+            <div class="form-grid">
+              <label class="full">الاسم الكامل <em>*</em><input name="name" type="text" placeholder="اكتب الاسم الكامل" autocomplete="name" required /></label>
+              <label>رقم الجوال <em>*</em><input name="phone" type="tel" placeholder="مثال: 5XXXXXXXX" inputmode="tel" autocomplete="tel" pattern="[0-9+ ]{8,}" required /></label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h2><span>2</span> عنوان التوصيل</h2>
+            <div class="form-grid">
+              <label>المحافظة <em>*</em><select name="governorate" required><option value="">اختر المحافظة</option><option>العاصمة</option><option>حولي</option><option>الفروانية</option><option>مبارك الكبير</option><option>الأحمدي</option><option>الجهراء</option></select></label>
+              <label>المنطقة <em>*</em><input name="area" type="text" placeholder="مثال: السالمية" required /></label>
+              <label>القطعة <em>*</em><input name="block" type="text" placeholder="رقم القطعة" required /></label>
+              <label>الشارع <em>*</em><input name="street" type="text" placeholder="اسم أو رقم الشارع" required /></label>
+              <label>رقم المنزل <em>*</em><input name="house" type="text" placeholder="رقم المنزل" required /></label>
+              <label>الدور والشقة <small>(اختياري)</small><input name="unit" type="text" placeholder="مثال: الدور الثاني" /></label>
+              <label class="full">ملاحظات التوصيل <small>(اختياري)</small><textarea name="notes" rows="3" placeholder="أي تعليمات تساعد المندوب على الوصول..."></textarea></label>
+            </div>
+          </section>
+          <p class="form-error" id="form-error" role="alert"></p>
+          <button class="continue-button" type="submit">متابعة إلى الدفع <span>←</span></button>
+        </form>
+
+        <aside class="order-summary">
+          <h2>ملخص الطلب</h2>
+          <div id="summary-products"></div>
+          <div class="empty-cart" id="empty-cart">السلة فارغة<br /><small>أضف منتجات من الصفحة الرئيسية للبدء</small></div>
+          <div class="summary-line"><span>عدد القطع</span><b id="items-count">0</b></div>
+          <div class="summary-line"><span>المجموع الفرعي</span><b id="subtotal">0.000 د.ك</b></div>
+          <div class="summary-line"><span>رسوم التوصيل</span><b id="delivery-fee">0.000 د.ك</b></div>
+          <div class="summary-total"><span>الإجمالي</span><strong id="total">0.000 د.ك</strong></div>
+          <div class="delivery-note">التوصيل خلال 24 - 48 ساعة داخل الكويت</div>
+        </aside>
+      </div>
+    </main>
+    <script>
+      const formatPrice = (value) => `${value.toFixed(3)} د.ك`;
+      const storedCart = JSON.parse(localStorage.getItem("poultry-cart") || "[]");
+      const cart = Array.isArray(storedCart)
+        ? storedCart.filter((item) => item && item.name && Number.isFinite(Number(item.price)) && Number(item.price) >= 0)
+          .map((item) => ({ ...item, price: Number(item.price), quantity: Math.max(1, Number(item.quantity) || 1) }))
+        : [];
+      localStorage.setItem("poultry-cart", JSON.stringify(cart));
+      const productsContainer = document.querySelector("#summary-products");
+      productsContainer.innerHTML = cart.map((item, index) => `
+        <div class="summary-product" data-index="${index}" data-price="${item.price}">
+          <div class="product-thumb">${item.icon || "🍗"}</div>
+          <div><strong>${item.name}</strong><small>الكمية: ${item.quantity}</small></div>
+          <div class="summary-actions"><b>${formatPrice(item.price * item.quantity)}</b><div class="summary-quantity"><button type="button" data-action="increase">+</button><span>${item.quantity}</span><button type="button" data-action="decrease">−</button></div></div>
+        </div>`).join("");
+      document.querySelector("#empty-cart").hidden = cart.length > 0;
+      const updateSummary = () => {
+        let subtotal = 0;
+        let items = 0;
+        document.querySelectorAll(".summary-product").forEach((product) => {
+          const quantity = Number(product.querySelector(".summary-quantity span").textContent);
+          const price = Number(product.dataset.price);
+          cart[Number(product.dataset.index)].quantity = quantity;
+          items += quantity;
+          subtotal += price * quantity;
+          product.querySelector("small").textContent = `الكمية: ${quantity}`;
+          product.querySelector(".summary-actions b").textContent = formatPrice(price * quantity);
+        });
+        const delivery = subtotal > 0 ? 0.500 : 0;
+        document.querySelector("#items-count").textContent = items;
+        document.querySelector("#subtotal").textContent = formatPrice(subtotal);
+        document.querySelector("#delivery-fee").textContent = formatPrice(delivery);
+        document.querySelector("#total").textContent = formatPrice(subtotal + delivery);
+        localStorage.setItem("poultry-cart", JSON.stringify(cart));
+      };
+      document.querySelectorAll("[data-action]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const quantity = button.parentElement.querySelector("span");
+          const next = button.dataset.action === "increase" ? Number(quantity.textContent) + 1 : Math.max(1, Number(quantity.textContent) - 1);
+          quantity.textContent = next;
+          updateSummary();
+        });
+      });
+      updateSummary();
+
+      document.querySelector("#checkout-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const error = document.querySelector("#form-error");
+        if (!cart.length) {
+          error.textContent = "السلة فارغة. أضف منتجًا واحدًا على الأقل قبل المتابعة.";
+          return;
+        }
+        if (!event.currentTarget.checkValidity()) {
+          error.textContent = "يرجى تعبئة جميع الحقول المطلوبة بشكل صحيح.";
+          event.currentTarget.reportValidity();
+          return;
+        }
+        error.textContent = "";
+        const deliveryDetails = Object.fromEntries(new FormData(event.currentTarget));
+        const sourcePage = JSON.parse(localStorage.getItem("poultry-source-page") || "null");
+        sessionStorage.setItem("delivery-details", JSON.stringify({
+          ...deliveryDetails,
+          sourcePage: sourcePage?.name || document.referrer || "غير معروف"
+        }));
+        window.location.href = "payment.html";
+      });
+    </script>
+  </body>
+</html>

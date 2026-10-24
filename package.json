@@ -1,12 +1,8 @@
 {
-  "name": "kuwait-chicken-store",
+  "name": "poultry-store",
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node server.mjs",
-    "check": "node --check server.mjs"
-  },
-  "engines": {
-    "node": ">=18"
+    "start": "node server.js"
   }
 }

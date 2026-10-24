@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>دواجن الوطنية | منتجات الدجاج</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="utility-bar">
+        <div class="container utility-inner">
+          <button class="outline-button" type="button">
+            <span class="user-icon" aria-hidden="true">●</span>
+            <span data-en="Login">تسجيل الدخول</span>
+          </button>
+          <button class="outline-button language-button" type="button" data-language-toggle>
+            <span>العربية</span>
+            <span class="globe" aria-hidden="true">◎</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="container navigation">
+        <a class="brand" href="#" aria-label="دواجن الوطنية">
+          <span class="brand-leaf brand-leaf-one"></span>
+          <span class="brand-leaf brand-leaf-two"></span>
+          <span class="brand-arabic">الوطنية</span>
+          <span class="brand-small">دواجن</span>
+          <span class="brand-english">AL WATANIA POULTRY</span>
+        </a>
+        <label class="search-box">
+          <input type="search" placeholder="ابحث عن أي شيء" aria-label="البحث عن المنتجات" />
+          <span aria-hidden="true">⌕</span>
+        </label>
+        <button class="cart-button" type="button" aria-label="عربة التسوق">
+          <span class="cart-icon" aria-hidden="true">🛒</span>
+          <span class="cart-count">0</span>
+        </button>
+      </div>
+
+      <nav class="category-nav container" aria-label="تصنيفات المنتجات">
+        <a href="#fresh">منتجات الدجاج الطازج</a>
+        <a href="#frozen">منتجات الدجاج المجمد</a>
+        <a href="#marinated">دجاج متبل</a>
+        <a href="#easy">سهل التحضير</a>
+        <a href="#ready">منتجات جاهزة للأكل</a>
+        <a href="#eggs">البيض</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero container" aria-label="منتجات دواجن الوطنية">
+        <div class="hero-copy">
+          <p class="eyebrow">طازج كل يوم</p>
+          <h1>طعم يجمعنا<br /><strong>على سفرتنا</strong></h1>
+          <p class="hero-description">اختيارات شهية من أجود منتجات الدجاج، محضّرة بعناية لتصل إلى مائدتك بأفضل جودة.</p>
+          <a class="primary-button" href="#products">تسوق الآن <span>←</span></a>
+        </div>
+        <div class="hero-art">
+          <div class="hero-glow"></div>
+          <div class="plate plate-main"></div>
+          <div class="food-card food-card-left">دجاج<br /><strong>طازج</strong></div>
+          <div class="food-card food-card-right">اختيارك<br /><strong>الأشهى</strong></div>
+          <span class="herb herb-one">✦</span>
+          <span class="herb herb-two">✧</span>
+        </div>
+      </section>
+
+      <section class="products container" id="products">
+        <div class="breadcrumb">الرئيسية / عروض المنتجات الطازجة / الدجاج الطازج</div>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">اكتشف تشكيلتنا</p>
+            <h2>منتجاتنا المميزة</h2>
+          </div>
+          <a class="view-all" href="#">عرض الكل <span>←</span></a>
+        </div>
+        <div class="filter-chips">
+          <button class="active" type="button">جميع المنتجات (39)</button>
+          <button type="button">لحوم الدجاج الطازجة (42)</button>
+          <button type="button">الدجاج الطازج (39)</button>
+          <button type="button">اللحوم الطازجة الأخرى (1)</button>
+        </div>
+        <div class="catalog-layout">
+          <aside class="filters">
+            <h3>تصفية</h3>
+            <input type="search" placeholder="بحث" aria-label="بحث في المنتجات" />
+            <details open><summary>Product Type</summary><label><input type="checkbox" /> Marinated Chicken <small>(22)</small></label><label><input type="checkbox" /> دجاج كامل <small>(4)</small></label><label><input type="checkbox" /> قطع الدجاج <small>(3)</small></label><label><input type="checkbox" /> أجنحة الدجاج <small>(3)</small></label><a href="#">عرض الكل</a></details>
+            <details open><summary>Brand</summary><label><input type="checkbox" /> اليوم <small>(5)</small></label><label><input type="checkbox" /> فريش <small>(18)</small></label><label><input type="checkbox" /> لولو <small>(7)</small></label><label><input type="checkbox" /> موتهدا <small>(3)</small></label><a href="#">عرض الكل</a></details>
+            <details open><summary>Pack Quantity</summary><label><input type="checkbox" /> 500 جم</label><label><input type="checkbox" /> 900 جم</label></details>
+          </aside>
+          <div class="product-grid">
+          <article class="product-card" id="fresh">
+            <div class="product-image fresh-image"><span>طازج</span></div>
+            <div class="product-info"><h3>دجاج برجر بالجبنة 500 جم</h3><div class="price"><del>1.250 د.ك</del><strong>0.775 د.ك</strong></div><div class="order-row"><div class="quantity"><button type="button" aria-label="زيادة الكمية">+</button><span>1</span><button type="button" aria-label="إنقاص الكمية">−</button></div><button class="order-button" type="button">اطلب الآن <span>🛒</span></button></div></div>
+          </article>
+          <article class="product-card" id="frozen">
+            <div class="product-image frozen-image"><span>طازج</span></div>
+            <div class="product-info"><h3>برجر دجاج طازج 300 جم</h3><div class="price"><del>1.145 د.ك</del><strong>0.710 د.ك</strong></div><div class="order-row"><div class="quantity"><button type="button" aria-label="زيادة الكمية">+</button><span>1</span><button type="button" aria-label="إنقاص الكمية">−</button></div><button class="order-button" type="button">اطلب الآن <span>🛒</span></button></div></div>
+          </article>
+          <article class="product-card" id="ready">
+            <div class="product-image fresh-image"><span>طازج</span></div>
+            <div class="product-info"><h3>دجاج متبل تنور 600 جم</h3><div class="price"><del>1.371 د.ك</del><strong>0.850 د.ك</strong></div><div class="order-row"><div class="quantity"><button type="button" aria-label="زيادة الكمية">+</button><span>2</span><button type="button" aria-label="إنقاص الكمية">−</button></div><button class="order-button" type="button">اطلب الآن <span>🛒</span></button></div></div>
+          </article>
+          <article class="product-card">
+            <div class="product-image fresh-image"><span>طازج</span></div>
+            <div class="product-info"><h3>دجاج كباب متبل 500 جم</h3><div class="price"><del>1.331 د.ك</del><strong>0.825 د.ك</strong></div><div class="order-row"><div class="quantity"><button type="button" aria-label="زيادة الكمية">+</button><span>1</span><button type="button" aria-label="إنقاص الكمية">−</button></div><button class="order-button" type="button">اطلب الآن <span>🛒</span></button></div></div>
+          </article>
+          <article class="product-card">
+            <div class="product-image ready-image"><span>اليوم</span></div>
+            <div class="product-info"><h3>أفخاذ دجاج طازجة 900 جم</h3><div class="price"><del>2.782 د.ك</del><strong>1.725 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">اطلب الآن <span>🛒</span></button></div></div>
+          </article>
+          <article class="product-card">
+            <div class="product-image frozen-image"><span>لولو</span></div>
+            <div class="product-info"><h3>الدجاج الكامل الطازج 500 جم</h3><div class="price"><del>1.371 د.ك</del><strong>0.850 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">اطلب الآن <span>🛒</span></button></div></div>
+          </article>
+          <article class="product-card fish-card"><div class="product-image fish-image fish-one"><span>Fresh</span></div><div class="product-info"><h3>سمك زبيدي طازج 500 جم</h3><div class="price"><strong>2.960 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card fish-card"><div class="product-image fish-image fish-two"><span>Fresh</span></div><div class="product-info"><h3>شرائح سلمون طازج 350 جم</h3><div class="price"><strong>3.490 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card fish-card"><div class="product-image fish-image fish-three"><span>Fresh</span></div><div class="product-info"><h3>سمك هامور منظف 1 كجم</h3><div class="price"><strong>1.390 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card fish-card"><div class="product-image fish-image fish-four"><span>Fresh</span></div><div class="product-info"><h3>فيليه سلمون طازج 350 جم</h3><div class="price"><strong>4.600 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card fish-card"><div class="product-image fish-image fish-five"><span>Fresh</span></div><div class="product-info"><h3>فيليه سلمون طازج 350 جم</h3><div class="price"><strong>4.290 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card fish-card"><div class="product-image fish-image fish-six"><span>Fresh</span></div><div class="product-info"><h3>محار كبير طازج 500 جم</h3><div class="price"><strong>1.010 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card fish-card"><div class="product-image fish-image fish-seven"><span>Fresh</span></div><div class="product-info"><h3>سمك سردين طازج 500 جم</h3><div class="price"><strong>1.425 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card fish-card"><div class="product-image fish-image fish-eight"><span>Fresh</span></div><div class="product-info"><h3>سمك شعري طازج منظف 1 كجم</h3><div class="price"><strong>4.390 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card fish-card"><div class="product-image fish-image fish-nine"><span>Fresh</span></div><div class="product-info"><h3>سمك شعري كامل 1 كجم</h3><div class="price"><strong>1.860 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card fish-card"><div class="product-image fish-image fish-ten"><span>Fresh</span></div><div class="product-info"><h3>سمك كنعد طازج منظف 1 كجم</h3><div class="price"><strong>2.735 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card meat-card"><div class="product-image meat-image meat-one"><span>Fresh</span></div><div class="product-info"><h3>لحم بقر مكعبات طازج 500 جم</h3><div class="price"><strong>2.450 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card meat-card"><div class="product-image meat-image meat-two"><span>Fresh</span></div><div class="product-info"><h3>شرائح لحم بقر طازجة 500 جم</h3><div class="price"><strong>2.530 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card meat-card"><div class="product-image meat-image meat-three"><span>Fresh</span></div><div class="product-info"><h3>لحم مفروم بقري طازج 500 جم</h3><div class="price"><strong>2.190 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card meat-card"><div class="product-image meat-image meat-four"><span>Fresh</span></div><div class="product-info"><h3>قطع لحم غنم طازج 500 جم</h3><div class="price"><strong>2.690 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card meat-card"><div class="product-image meat-image meat-five"><span>Fresh</span></div><div class="product-info"><h3>لحم مفروم بقري ممتاز 500 جم</h3><div class="price"><strong>3.445 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card meat-card"><div class="product-image meat-image meat-six"><span>Fresh</span></div><div class="product-info"><h3>شرائح لحم بقري رفيعة 300 جم</h3><div class="price"><strong>2.515 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card meat-card"><div class="product-image meat-image meat-seven"><span>Fresh</span></div><div class="product-info"><h3>ستيك بقري طازج 300 جم</h3><div class="price"><strong>4.725 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card meat-card"><div class="product-image meat-image meat-eight"><span>Fresh</span></div><div class="product-info"><h3>شرائح لحم بقري 300 جم</h3><div class="price"><strong>2.725 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card meat-card"><div class="product-image meat-image meat-nine"><span>Fresh</span></div><div class="product-info"><h3>مكعبات لحم بقري طازج 500 جم</h3><div class="price"><strong>3.735 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+          <article class="product-card meat-card"><div class="product-image meat-image meat-ten"><span>Fresh</span></div><div class="product-info"><h3>لحم مفروم بقري طازج 500 جم</h3><div class="price"><strong>2.955 د.ك</strong></div><div class="order-row"><button class="order-button" type="button">أضف <span>+</span></button></div></div></article>
+        </div>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
